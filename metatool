@@ -91,8 +91,7 @@ date: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M%z")}
 
 {changelog.strip()}
 
-Check the GitHub repositories for details.
-https://github.com/albertlauncher/albert/commits/v{args.version}
+Check the [GitHub repositories](https://github.com/albertlauncher/albert/commits/v{args.version}) for details.
 """)
         if "y".startswith(input("News post created. Build/Test/Publish it? [Y/n] ").lower()):
             run("./build_check_deploy.sh", cwd=root/"documentation").check_returncode()
