@@ -3,7 +3,7 @@
 #pragma once
 #include <vector>
 #include "standarditem.h"
-#include "albert/indexable.h"
+#include "albert/indexitem.h"
 
 namespace Core {
 
@@ -12,7 +12,7 @@ namespace Core {
 * If you dont need the flexibility subclassing the abstract classes provided,
 * you can simply use this container, fill it with data.
 */
-class EXPORT_CORE StandardIndexItem final : public IndexableItem
+class EXPORT_CORE StandardIndexItem final : public IndexItem
 {
 public:
 
@@ -21,7 +21,7 @@ public:
         QString iconPath = QString(),
         QString text = QString(),
         QString subtext = QString(),
-        std::vector<Core::IndexableItem::IndexString> indexStrings = std::vector<Core::IndexableItem::IndexString>(),
+        std::vector<Core::IndexItem::IndexString> indexStrings = std::vector<Core::IndexItem::IndexString>(),
         std::vector<std::shared_ptr<Action>> actions = std::vector<std::shared_ptr<Action>>(),
         QString completion = QString(),
         Urgency urgency = Item::Urgency::Normal
@@ -39,8 +39,8 @@ public:
     QString subtext() const override;
     void setSubtext(QString subtext);
 
-    virtual std::vector<Core::IndexableItem::IndexString> indexStrings() const override;
-    void setIndexKeywords(std::vector<Core::IndexableItem::IndexString> indexStrings);
+    virtual std::vector<Core::IndexItem::IndexString> indexStrings() const override;
+    void setIndexKeywords(std::vector<Core::IndexItem::IndexString> indexStrings);
 
     std::vector<std::shared_ptr<Action>> actions() override;
     void setActions(std::vector<std::shared_ptr<Action>> actions);
@@ -59,7 +59,7 @@ protected:
     QString iconPath_;
     QString text_;
     QString subtext_;
-    std::vector<IndexableItem::IndexString> indexStrings_;
+    std::vector<IndexItem::IndexString> indexStrings_;
     std::vector<std::shared_ptr<Action>> actions_;
     QString completion_;
     Item::Urgency urgency_;

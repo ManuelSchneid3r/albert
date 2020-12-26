@@ -2,7 +2,7 @@
 
 #include <QRegularExpression>
 #include <algorithm>
-#include "indexable.h"
+#include "indexitem.h"
 #include "prefixsearch.h"
 using std::map;
 using std::set;
@@ -29,13 +29,13 @@ Core::PrefixSearch::~PrefixSearch(){}
 
 
 /** ***************************************************************************/
-void Core::PrefixSearch::add(const std::shared_ptr<IndexableItem> &indexable) {
+void Core::PrefixSearch::add(const std::shared_ptr<IndexItem> &indexable) {
 
     // Add indexable to the index
     index_.push_back(indexable);
     uint id = static_cast<uint>(index_.size()-1);
 
-    vector<IndexableItem::IndexString> indexStrings = indexable->indexStrings();
+    vector<IndexItem::IndexString> indexStrings = indexable->indexStrings();
     for (const auto &idxStr : indexStrings) {
         // Build an inverted index
         QStringList words = idxStr.string.split(QRegularExpression(SEPARATOR_REGEX), QString::SkipEmptyParts);
@@ -54,14 +54,14 @@ void Core::PrefixSearch::clear() {
 
 
 /** ***************************************************************************/
-vector<shared_ptr<Core::IndexableItem> > Core::PrefixSearch::search(const QString &query) const {
+vector<shared_ptr<Core::IndexItem> > Core::PrefixSearch::search(const QString &query) const {
 
     // Make words unique, lower and prefixfree
     set<QString> words = splitString(query);
 
     // Skip if there arent any // CONSTRAINT (2): |W| > 0
     if (words.empty())
-        return vector<shared_ptr<IndexableItem>>();
+        return vector<shared_ptr<IndexItem>>();
 
     set<uint> resultsSet;
     set<QString>::iterator wordIt = words.begin();
@@ -89,13 +89,13 @@ vector<shared_ptr<Core::IndexableItem> > Core::PrefixSearch::search(const QStrin
 
         // Break if intersection is empty
         if (intersection.empty())
-            return vector<shared_ptr<IndexableItem>>();
+            return vector<shared_ptr<IndexItem>>();
 
         resultsSet = std::move(intersection);
     }
 
     // Convert to a std::vector
-    vector<shared_ptr<IndexableItem>> resultsVector;
+    vector<shared_ptr<IndexItem>> resultsVector;
     for (uint id : resultsSet)
         resultsVector.emplace_back(index_.at(id));
     return resultsVector;

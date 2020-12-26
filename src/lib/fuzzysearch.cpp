@@ -2,7 +2,7 @@
 
 #include <QRegularExpression>
 #include "fuzzysearch.h"
-#include "indexable.h"
+#include "indexitem.h"
 #include "prefixsearch.h"
 using std::map;
 using std::set;
@@ -77,14 +77,14 @@ Core::FuzzySearch::~FuzzySearch() {
 
 
 /** ***************************************************************************/
-void Core::FuzzySearch::add(const std::shared_ptr<IndexableItem> &indexable) {
+void Core::FuzzySearch::add(const std::shared_ptr<IndexItem> &indexable) {
 
     // Add indexable to the index
     index_.push_back(indexable);
     uint id = static_cast<uint>(index_.size()-1);
 
     // Add a mappings to the inverted index which maps on t.
-    vector<IndexableItem::IndexString> indexStrings = indexable->indexStrings();
+    vector<IndexItem::IndexString> indexStrings = indexable->indexStrings();
     for (const auto &idxStr : indexStrings) {
         set<QString> words = splitString(idxStr.string);
         for (const QString &w : words) {
@@ -111,14 +111,14 @@ void Core::FuzzySearch::clear() {
 
 
 /** ***************************************************************************/
-vector<shared_ptr<Core::IndexableItem> > Core::FuzzySearch::search(const QString &query) const {
+vector<shared_ptr<Core::IndexItem> > Core::FuzzySearch::search(const QString &query) const {
 
     // Make words unique, lower and prefixfree
     set<QString> words = splitString(query);
 
     // Quit if there are no words in query
     if (words.empty())
-        return vector<shared_ptr<IndexableItem>>();
+        return vector<shared_ptr<IndexItem>>();
 
     vector<map<uint,uint>> resultsPerWord; // id, count
     for ( const QString &word : words ) {
@@ -222,7 +222,7 @@ vector<shared_ptr<Core::IndexableItem> > Core::FuzzySearch::search(const QString
             finalResult.emplace_back(result.first, result.second);
     }
 
-    vector<shared_ptr<IndexableItem>> result;
+    vector<shared_ptr<IndexItem>> result;
     for (const pair<uint,uint> &pair : finalResult) {
         result.emplace_back(index_.at(pair.first));
     }

@@ -12,7 +12,7 @@ namespace Core {
  * @brief The Indexable class
  * The interface items need to be indexable by the offline index
  */
-class EXPORT_CORE IndexableItem : public Item
+class EXPORT_CORE IndexItem : public Item
 {
 
 public:
@@ -27,7 +27,7 @@ public:
 
 };
 
-typedef std::vector<Core::IndexableItem::IndexString> IdxStrList;
+typedef std::vector<Core::IndexItem::IndexString> IdxStrList;
 
 }
 

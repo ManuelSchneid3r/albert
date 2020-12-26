@@ -6,7 +6,7 @@ Core::StandardIndexItem::StandardIndexItem(QString id,
                                            QString iconPath,
                                            QString text,
                                            QString subtext,
-                                           std::vector<Core::IndexableItem::IndexString> indexStrings,
+                                           std::vector<Core::IndexItem::IndexString> indexStrings,
                                            std::vector<std::shared_ptr<Core::Action> > actions,
                                            QString completion,
                                            Core::Item::Urgency urgency)
@@ -50,6 +50,6 @@ void Core::StandardIndexItem::setActions(std::vector<std::shared_ptr<Core::Actio
 
 void Core::StandardIndexItem::addAction(std::shared_ptr<Core::Action> action) { actions_.push_back(std::move(action)); }
 
-std::vector<Core::IndexableItem::IndexString> Core::StandardIndexItem::indexStrings() const { return indexStrings_; }
+std::vector<Core::IndexItem::IndexString> Core::StandardIndexItem::indexStrings() const { return indexStrings_; }
 
-void Core::StandardIndexItem::setIndexKeywords(std::vector<Core::IndexableItem::IndexString> indexStrings) { indexStrings_ = std::move(indexStrings); }
+void Core::StandardIndexItem::setIndexKeywords(std::vector<Core::IndexItem::IndexString> indexStrings) { indexStrings_ = std::move(indexStrings); }

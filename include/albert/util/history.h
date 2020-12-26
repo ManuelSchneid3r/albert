@@ -7,6 +7,9 @@
 
 namespace Core {
 
+/**
+ * @brief The History class. This is the common input line history backend for frontends.
+ */
 class EXPORT_CORE History final : public QObject
 {
     Q_OBJECT

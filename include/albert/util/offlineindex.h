@@ -9,7 +9,7 @@
 namespace Core {
 
 class SearchBase;
-class IndexableItem;
+class IndexItem;
 
 class EXPORT_CORE OfflineIndex final {
 
@@ -65,7 +65,7 @@ public:
      * @brief Build the search index
      * @param The items to index
      */
-    void add(const std::shared_ptr<Core::IndexableItem> &idxble);
+    void add(const std::shared_ptr<Core::IndexItem> &idxble);
 
     /**
      * @brief Clear the search index
@@ -76,7 +76,7 @@ public:
      * @brief Perform a search on the index
      * @param req The query string
      */
-    std::vector<std::shared_ptr<Core::IndexableItem>> search(const QString &req) const;
+    std::vector<std::shared_ptr<Core::IndexItem>> search(const QString &req) const;
 
 private:
 

@@ -1,7 +1,7 @@
 // Copyright (C) 2014-2018 Manuel Schneider
 
 #include "albert/util/offlineindex.h"
-#include "albert/indexable.h"
+#include "albert/indexitem.h"
 #include "prefixsearch.h"
 #include "fuzzysearch.h"
 
@@ -69,7 +69,7 @@ double Core::OfflineIndex::delta() {
 
 
 /** ***************************************************************************/
-void Core::OfflineIndex::add(const std::shared_ptr<Core::IndexableItem> &idxble) {
+void Core::OfflineIndex::add(const std::shared_ptr<Core::IndexItem> &idxble) {
     impl_->add(idxble);
 }
 
@@ -81,6 +81,6 @@ void Core::OfflineIndex::clear() {
 
 
 /** ***************************************************************************/
-std::vector<std::shared_ptr<Core::IndexableItem> > Core::OfflineIndex::search(const QString &req) const {
+std::vector<std::shared_ptr<Core::IndexItem> > Core::OfflineIndex::search(const QString &req) const {
     return impl_->search(req);
 }

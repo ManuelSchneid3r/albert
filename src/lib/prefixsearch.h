@@ -9,7 +9,7 @@
 
 namespace Core {
 
-class IndexableItem;
+class IndexItem;
 
 class PrefixSearch : public SearchBase
 {
@@ -19,13 +19,13 @@ public:
     PrefixSearch(const PrefixSearch &rhs);
     ~PrefixSearch();
 
-    void add(const std::shared_ptr<IndexableItem> &idxble) override;
+    void add(const std::shared_ptr<IndexItem> &idxble) override;
     void clear() override;
-    std::vector<std::shared_ptr<IndexableItem>> search(const QString &req) const override;
+    std::vector<std::shared_ptr<IndexItem>> search(const QString &req) const override;
 
 protected:
 
-    std::vector<std::shared_ptr<IndexableItem>> index_;
+    std::vector<std::shared_ptr<IndexItem>> index_;
     std::map<QString,std::set<uint>> invertedIndex_;
 };
 

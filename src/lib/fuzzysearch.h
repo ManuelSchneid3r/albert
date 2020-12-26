@@ -17,9 +17,9 @@ public:
     explicit FuzzySearch(const PrefixSearch& rhs, uint q = 3, double d = 1.0/3);
     ~FuzzySearch();
 
-    void add(const std::shared_ptr<IndexableItem> &idxble) override;
+    void add(const std::shared_ptr<IndexItem> &idxble) override;
     void clear() override;
-    std::vector<std::shared_ptr<IndexableItem>> search(const QString &req) const override;
+    std::vector<std::shared_ptr<IndexItem>> search(const QString &req) const override;
     inline double delta() const {return delta_;}
     inline void setDelta(double d){delta_=d;}
 

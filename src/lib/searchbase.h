@@ -8,16 +8,16 @@
 
 namespace Core {
 
-class IndexableItem;
+class IndexItem;
 
 class SearchBase
 {
 public:
 
     virtual ~SearchBase();
-    virtual void add(const std::shared_ptr<IndexableItem> &idxble) = 0;
+    virtual void add(const std::shared_ptr<IndexItem> &idxble) = 0;
     virtual void clear() = 0;
-    virtual std::vector<std::shared_ptr<IndexableItem>> search(const QString &req) const = 0;
+    virtual std::vector<std::shared_ptr<IndexItem>> search(const QString &req) const = 0;
 
 protected:
 
