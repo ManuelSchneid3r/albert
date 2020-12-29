@@ -3,30 +3,31 @@
 * DYOR, check for existing issues/FAQ
 * For support join the chats.
 * Please post extension requests in the wiki https://github.com/albertlauncher/albert/wiki/Extension-suggestions
-* If you really want to get help, be nice and provide the information below
 -->
 
 #### Source
-<!-- e.g. ppa:name, repository, from source, etc … -->
+<!-- e.g. ppa:name, repository, built from source, etc … -->
 
 #### Additional info
 
-<!-- Run the following commands and post the output here -->
+<!-- Replace the comments below with the output of the contained commands -->
 
-<details>
-<summary>Albert report output</summary>
-<!-- Output of albert --report -->
-<!-- <v0.14.21: cat /etc/issue; uname -r; env | grep -e SESSION_TYPE -e DESKTOP; qmake-qt5 -v; albert -v -->
+<details><summary>Albert report output</summary>
+<!--
+albert --report
+ -->
 </details>
 
-<details>
-<summary>QtDiag output</summary>
-<!-- Output of qtdiag -->
+<details><summary>Terminal output</summary>
+<!--
+QT_LOGGING_RULES="*.debug=true" albert
+-->
 </details>
 
-<details>
-<summary>Terminal output (stdout and stderr)</summary>
-<!-- Terminal output of cmake, make or albert for configure, build or runtime issues respectively -->
+<details><summary>QtDiag output</summary>
+<!--
+qtdiag
+-->
 </details>
 
 #### Steps to reproduce
