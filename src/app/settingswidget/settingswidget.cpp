@@ -26,10 +26,7 @@
 #include "loadermodel.h"
 #include "logging.h"
 #include "settingswidget.h"
-// TODO: Remove Apr 2020
-#ifdef BUILD_WITH_QTCHARTS
 #include "statswidget.h"
-#endif
 using namespace std;
 using namespace Core;
 using namespace GlobalShortcut;

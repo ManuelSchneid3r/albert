@@ -80,26 +80,19 @@ target_link_libraries(${TARGET_NAME_LIB}
 
 ###############################################################################
 
-option(BUILD_WITH_QTCHARTS "Use QtCharts to plot stats." ON)
-
 find_package(Qt5 5.5.0
     COMPONENTS
+        Charts
         Concurrent
         Network
         Sql
         Widgets
         X11Extras
-    OPTIONAL_COMPONENTS
-        Charts
 )
 
 set(TARGET_NAME_BIN ${PROJECT_NAME}-bin)
 
 file(GLOB_RECURSE BIN_SRC src/app/*)
-if(NOT BUILD_WITH_QTCHARTS)  # TODO: remove Apr 2020
-    list(REMOVE_ITEM BIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/app/settingswidget/statswidget.h")
-    list(REMOVE_ITEM BIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/app/settingswidget/statswidget.cpp")
-endif()
 
 add_executable(${TARGET_NAME_BIN} ${BIN_SRC} resources.qrc)
 
@@ -115,6 +108,7 @@ endif()
 
 target_link_libraries(${TARGET_NAME_BIN}
     PRIVATE
+        Qt5::Charts
         Qt5::Concurrent
         Qt5::Network
         Qt5::Sql
@@ -124,10 +118,6 @@ target_link_libraries(${TARGET_NAME_BIN}
         globalshortcut
         xdg
 )
-if(BUILD_WITH_QTCHARTS)
-    target_link_libraries(${TARGET_NAME_BIN} PRIVATE Qt5::Charts)
-    target_compile_definitions(${TARGET_NAME_BIN} PRIVATE -DBUILD_WITH_QTCHARTS) #export branch
-endif()
 
 ###############################################################################
 
