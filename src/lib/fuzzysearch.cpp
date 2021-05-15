@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include <QRegularExpression>
 #include "fuzzysearch.h"
@@ -49,14 +49,14 @@ bool checkPrefixEditDistance(const QString &prefix, const QString &str, uint del
 
 
 
-/** ***************************************************************************/
+
 Core::FuzzySearch::FuzzySearch(uint q, double d) : q_(q), delta_(d) {
 
 }
 
 
 
-/** ***************************************************************************/
+
 Core::FuzzySearch::FuzzySearch(const Core::PrefixSearch &rhs, uint q, double d)
     : PrefixSearch(rhs), q_(q), delta_(d) {
     // Iterate over the inverted index and build the qGramindex
@@ -69,14 +69,14 @@ Core::FuzzySearch::FuzzySearch(const Core::PrefixSearch &rhs, uint q, double d)
 
 
 
-/** ***************************************************************************/
+
 Core::FuzzySearch::~FuzzySearch() {
 
 }
 
 
 
-/** ***************************************************************************/
+
 void Core::FuzzySearch::add(const std::shared_ptr<IndexItem> &indexable) {
 
     // Add indexable to the index
@@ -102,7 +102,7 @@ void Core::FuzzySearch::add(const std::shared_ptr<IndexItem> &indexable) {
 
 
 
-/** ***************************************************************************/
+
 void Core::FuzzySearch::clear() {
     qGramIndex_.clear();
     invertedIndex_.clear();
@@ -110,7 +110,7 @@ void Core::FuzzySearch::clear() {
 }
 
 
-/** ***************************************************************************/
+
 vector<shared_ptr<Core::IndexItem> > Core::FuzzySearch::search(const QString &query) const {
 
     // Make words unique, lower and prefixfree

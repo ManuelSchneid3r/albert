@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2019 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include "standarditem.h"
 

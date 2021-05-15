@@ -1,34 +1,36 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QDir>
-#include <QObject>
-#include <QString>
 #include <QSettings>
 #include <memory>
-#include "core_globals.h"
+#include "extensionmanager.h"
 
-#define ALBERT_PLUGIN_IID_PREFIX "org.albert.pluginv1-alpha"
 
+class QWidget;
 namespace Core {
-
-class PluginPrivate;
-
-class EXPORT_CORE Plugin : public QObject
-{
-    Q_OBJECT
-
+struct PluginSpec;
+class EXPORT_CORE PluginInstance : virtual public Extension {
 public:
+    virtual ~PluginInstance();
 
-    Plugin(const QString &id);
-    ~Plugin();
+    PluginSpec &spec();
 
     /**
      * @brief id
      * This is the global unique identifier of the plugin
      * @return
      */
-    const QString &id() const;
+    QString id() const override;
+
+    /**
+     * @brief The settings widget factory
+     * This has to return the widget that is accessible to the user from the
+     * albert settings plugin tab. If the return value is a nullptr there will
+     * be no settings widget available in the settings.
+     * @return The settings widget
+     */
+    virtual QWidget* widget(QWidget *parent = nullptr);
 
     /**
      * @brief cacheLocation
@@ -59,12 +61,15 @@ public:
      * should create a new instance with the path of this object.
      * @return The settings object
      */
-    QSettings &settings() const;
+    std::unique_ptr<QSettings> settings();
 
-private:
 
-    std::unique_ptr<PluginPrivate> d;
+protected:
+
+    PluginInstance(PluginSpec &spec);
+
+    struct Private;
+    std::unique_ptr<Private> d;
 
 };
-
 }

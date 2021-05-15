@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QMutex>
@@ -7,8 +7,9 @@
 #include <memory>
 #include <utility>
 #include <vector>
-#include "core_globals.h"
+#include "export.h"
 
+class QueryExecution;
 
 namespace Core {
 
@@ -113,7 +114,7 @@ private:
     bool sort_ = true;
     bool isValid_ = true;
 
-    friend class QueryExecution;
+    friend class ::QueryExecution;
 };
 
 }

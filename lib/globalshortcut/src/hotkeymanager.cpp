@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include "globalshortcut/hotkeymanager.h"
 #if defined __linux__ || defined __FreeBSD__
@@ -9,31 +9,31 @@
 #endif
 #include <QKeySequence>
 
-/** ***************************************************************************/
+
 GlobalShortcut::HotkeyManager::HotkeyManager(QObject *parent) :
     QObject(parent), d(new HotkeyManagerPrivate) {
     connect(d.get(), &HotkeyManagerPrivate::hotKeyPressed, this, &HotkeyManager::onHotkeyPressed);
     enabled_ = true;
 }
 
-/** ***************************************************************************/
+
 GlobalShortcut::HotkeyManager::~HotkeyManager() {
 
 }
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManager::registerHotkey(const QString &hk) {
 	return registerHotkey(QKeySequence(hk));
 }
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManager::registerHotkey(const QKeySequence &hk) {
 	if (hk.count() != 1)
 		return false;
 	return registerHotkey(hk[0]);
 }
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManager::registerHotkey(const int hk) {
     if (hotkeys_.contains(hk))
         return true;
@@ -44,12 +44,12 @@ bool GlobalShortcut::HotkeyManager::registerHotkey(const int hk) {
     return false;
 }
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManager::unregisterHotkey(const QString &hk) {
     return unregisterHotkey(QKeySequence(hk));
 }
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManager::unregisterHotkey(const QKeySequence &hk) {
     if (hk.count() != 1)
         return false;
@@ -57,7 +57,7 @@ bool GlobalShortcut::HotkeyManager::unregisterHotkey(const QKeySequence &hk) {
     return true;
 }
 
-/** ***************************************************************************/
+
 void GlobalShortcut::HotkeyManager::unregisterHotkey(const int hk) {
     if (!hotkeys_.contains(hk))
         return;
@@ -65,7 +65,7 @@ void GlobalShortcut::HotkeyManager::unregisterHotkey(const int hk) {
     hotkeys_.remove(hk);
 }
 
-/** ***************************************************************************/
+
 void GlobalShortcut::HotkeyManager::onHotkeyPressed() {
     if (enabled_)
 		emit hotKeyPressed();

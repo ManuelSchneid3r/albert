@@ -1,7 +1,5 @@
-// Copyright (C) 2014-2018 Manuel Schneider
-
+// Copyright (C) 2014-2021 Manuel Schneider
 #pragma once
-
 #if defined(_MSC_VER)
     #define EXPORT __declspec(dllexport)
     #define IMPORT __declspec(dllimport)
@@ -19,5 +17,3 @@
 #else
  #define EXPORT_CORE IMPORT
 #endif
-
-#include <QString>

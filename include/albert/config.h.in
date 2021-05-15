@@ -1,0 +1,5 @@
+// Copyright (C) 2014-2021 Manuel Schneider
+#pragma once
+#define ALBERT_MAJOR_VERSION @PROJECT_VERSION_MAJOR@
+#define ALBERT_MINOR_VERSION @PROJECT_VERSION_MINOR@
+#define ALBERT_IID "org.albert.plugininterface/@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@"

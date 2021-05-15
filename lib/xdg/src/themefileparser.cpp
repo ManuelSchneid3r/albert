@@ -1,32 +1,32 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include "themefileparser.h"
 
-/** ***************************************************************************/
+
 XDG::ThemeFileParser::ThemeFileParser(const QString& iniFilePath)
     : iniFile_(iniFilePath, QSettings::IniFormat) {
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::ThemeFileParser::path() {
   return iniFile_.fileName();
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::ThemeFileParser::name() {
   return iniFile_.value("Icon Theme/Name").toString();
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::ThemeFileParser::comment() {
   return iniFile_.value("Icon Theme/Comment").toString();
 }
 
 
-/** ***************************************************************************/
+
 QStringList XDG::ThemeFileParser::inherits() {
   QStringList inherits = iniFile_.value("Icon Theme/Inherits").toStringList();
   if ( inherits.isEmpty() && name() != "hicolor" )
@@ -35,19 +35,19 @@ QStringList XDG::ThemeFileParser::inherits() {
 }
 
 
-/** ***************************************************************************/
+
 QStringList XDG::ThemeFileParser::directories() {
   return iniFile_.value("Icon Theme/Directories").toStringList();
 }
 
 
-/** ***************************************************************************/
+
 bool XDG::ThemeFileParser::hidden() {
   return iniFile_.value("Icon Theme/Hidden").toBool();
 }
 
 
-/** ***************************************************************************/
+
 int XDG::ThemeFileParser::size(const QString& directory) {
   iniFile_.beginGroup(directory);
   int result = iniFile_.value("Size").toInt();
@@ -56,7 +56,7 @@ int XDG::ThemeFileParser::size(const QString& directory) {
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::ThemeFileParser::context(const QString& directory) {
   iniFile_.beginGroup(directory);
   QString result = iniFile_.value("Context").toString();
@@ -65,7 +65,7 @@ QString XDG::ThemeFileParser::context(const QString& directory) {
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::ThemeFileParser::type(const QString& directory) {
   iniFile_.beginGroup(directory);
   QString result = iniFile_.contains("Type") ? iniFile_.value("Type").toString()
@@ -75,7 +75,7 @@ QString XDG::ThemeFileParser::type(const QString& directory) {
 }
 
 
-/** ***************************************************************************/
+
 int XDG::ThemeFileParser::maxSize(const QString& directory) {
   iniFile_.beginGroup(directory);
   int result = iniFile_.contains("MaxSize") ? iniFile_.value("MaxSize").toInt()
@@ -85,7 +85,7 @@ int XDG::ThemeFileParser::maxSize(const QString& directory) {
 }
 
 
-/** ***************************************************************************/
+
 int XDG::ThemeFileParser::minSize(const QString& directory) {
   iniFile_.beginGroup(directory);
   int result = iniFile_.contains("MinSize") ? iniFile_.value("MinSize").toInt()
@@ -95,7 +95,7 @@ int XDG::ThemeFileParser::minSize(const QString& directory) {
 }
 
 
-/** ***************************************************************************/
+
 int XDG::ThemeFileParser::threshold(const QString& directory) {
   iniFile_.beginGroup(directory);
   int result =

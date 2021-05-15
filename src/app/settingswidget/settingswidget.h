@@ -1,31 +1,18 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include "ui_settingswidget.h"
 
-namespace GlobalShortcut {
-class HotkeyManager;
-}
-namespace Core {
-class ExtensionManager;
+namespace GlobalShortcut { class HotkeyManager; }
+namespace Core { class ExtensionManager; }
 class FrontendManager;
 class QueryManager;
 class MainWindow;
 class TrayIcon;
 
-class SettingsWidget final : public QWidget
-{
-    Q_OBJECT
-
+class SettingsWidget final : public QWidget {
 public:
-
-    SettingsWidget(ExtensionManager *extensionManager,
-                   FrontendManager *frontendManager,
-                   QueryManager *queryManager,
-                   GlobalShortcut::HotkeyManager *hotkeyManager,
-                   TrayIcon *trayIcon,
-                   QWidget * parent = nullptr,
-                   Qt::WindowFlags f = nullptr);
+    SettingsWidget(QueryManager *, GlobalShortcut::HotkeyManager *, TrayIcon *);
 
 private:
 
@@ -35,13 +22,9 @@ private:
     void changeHotkey(int);
     void updatePluginInformations(const QModelIndex & curr);
 
-    ExtensionManager *extensionManager_;
-    FrontendManager *frontendManager_;
     QueryManager *queryManager_;
     GlobalShortcut::HotkeyManager *hotkeyManager_;
     TrayIcon *trayIcon_;
-    Ui::SettingsDialog ui;
+    Ui::SettingsWidget ui;
 
 };
-
-}

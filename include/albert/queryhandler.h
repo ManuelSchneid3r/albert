@@ -1,23 +1,16 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QString>
 #include <QStringList>
 #include "query.h"
-#include "core_globals.h"
+#include "extensionmanager.h"
+#include "export.h"
 
 namespace Core {
 
-class Query;
-
-class EXPORT_CORE QueryHandler
-{
+class EXPORT_CORE QueryHandler : virtual public Extension {
 public:
-
-    QueryHandler(QString id) : id(id) {}
-    virtual ~QueryHandler() {}
-
-    const QString id;
 
     /**
      * @brief The triggers that makes the plugin beeing run exclusice

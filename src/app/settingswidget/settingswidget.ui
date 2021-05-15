@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Core::SettingsDialog</class>
- <widget class="QWidget" name="Core::SettingsDialog">
+ <class>SettingsWidget</class>
+ <widget class="QWidget" name="SettingsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,7 +35,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabGeneral">
       <attribute name="title">
@@ -248,88 +248,10 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabPlugins">
+     <widget class="PluginWidget" name="tabPlugins">
       <attribute name="title">
-       <string>Extensions</string>
+       <string>Plugins</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QListView" name="listView_plugins">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>200</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>200</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="horizontalScrollBarPolicy">
-            <enum>Qt::ScrollBarAlwaysOff</enum>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_pluginInfos" native="true">
-         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,1">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="label_pluginTitle">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">font-size: 12pt;padding-bottom: 5px;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_placeholder">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Select a plugin.</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
      </widget>
      <widget class="QWidget" name="tabAbout">
       <attribute name="title">
@@ -411,6 +333,12 @@ p, li { white-space: pre-wrap; }
    <extends>QPushButton</extends>
    <header>grabkeybutton.h</header>
   </customwidget>
+  <customwidget>
+   <class>PluginWidget</class>
+   <extends>QWidget</extends>
+   <header>pluginwidget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>tabs</tabstop>
@@ -422,7 +350,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>checkBox_incrementalSort</tabstop>
   <tabstop>checkBox_autostart</tabstop>
   <tabstop>pushButton_clearHistory</tabstop>
-  <tabstop>listView_plugins</tabstop>
  </tabstops>
  <resources>
   <include location="../../../resources.qrc"/>

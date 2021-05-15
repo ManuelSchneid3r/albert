@@ -1,10 +1,10 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QString>
 #include <vector>
 #include <memory>
-#include "core_globals.h"
+#include "export.h"
 
 namespace Core {
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include <QRegularExpression>
 #include <algorithm>
@@ -11,24 +11,24 @@ using std::vector;
 
 
 
-/** ***************************************************************************/
+
 Core::PrefixSearch::PrefixSearch(){
 
 }
 
 
-/** ***************************************************************************/
+
 Core::PrefixSearch::PrefixSearch(const Core::PrefixSearch &rhs) {
     index_ = rhs.index_;
     invertedIndex_ = rhs.invertedIndex_;
 }
 
 
-/** ***************************************************************************/
+
 Core::PrefixSearch::~PrefixSearch(){}
 
 
-/** ***************************************************************************/
+
 void Core::PrefixSearch::add(const std::shared_ptr<IndexItem> &indexable) {
 
     // Add indexable to the index
@@ -46,14 +46,14 @@ void Core::PrefixSearch::add(const std::shared_ptr<IndexItem> &indexable) {
 }
 
 
-/** ***************************************************************************/
+
 void Core::PrefixSearch::clear() {
     invertedIndex_.clear();
     index_.clear();
 }
 
 
-/** ***************************************************************************/
+
 vector<shared_ptr<Core::IndexItem> > Core::PrefixSearch::search(const QString &query) const {
 
     // Make words unique, lower and prefixfree

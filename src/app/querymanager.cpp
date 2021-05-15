@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include <QApplication>
 #include <QSettings>
@@ -10,11 +10,10 @@
 #include <QStandardPaths>
 #include <chrono>
 #include <vector>
-#include "albert/extension.h"
+#include "albert/extensionmanager.h"
 #include "albert/fallbackprovider.h"
 #include "albert/item.h"
 #include "albert/queryhandler.h"
-#include "extensionmanager.h"
 #include "logging.h"
 #include "queryexecution.h"
 #include "querymanager.h"
@@ -27,11 +26,8 @@ const char* CFG_INCREMENTAL_SORT = "incrementalSort";
 const bool  DEF_INCREMENTAL_SORT = false;
 }
 
-/** ***************************************************************************/
-Core::QueryManager::QueryManager(ExtensionManager* em, QObject *parent)
-    : QObject(parent),
-      extensionManager_(em) {
-
+QueryManager::QueryManager(QObject *parent) : QObject(parent)
+{
     QSqlQuery q;
 
     // Get last query id
@@ -57,45 +53,45 @@ Core::QueryManager::QueryManager(ExtensionManager* em, QObject *parent)
 }
 
 
-/** ***************************************************************************/
-QueryManager::~QueryManager() {
+QueryManager::~QueryManager()
+{
 
 }
 
 
-/** ***************************************************************************/
-void Core::QueryManager::setupSession() {
+void QueryManager::setupSession()
+{
 
     DEBG << "========== SESSION SETUP STARTED ==========";
 
     system_clock::time_point start = system_clock::now();
 
     // Call all setup routines
-    for (Core::QueryHandler *handler : extensionManager_->queryHandlers()) {
+    for (QueryHandler *handler : Core::ExtensionManager::Global->extensionsOfType<QueryHandler>()) {
         system_clock::time_point start = system_clock::now();
         handler->setupSession();
         long duration = duration_cast<microseconds>(system_clock::now()-start).count();
-        DEBG << qPrintable(QString("TIME: %1 µs SESSION SETUP [%2]").arg(duration, 6).arg(handler->id));
+        DEBG << "SESSION SETUP [µs]" << duration << handler->id();
     }
 
     long duration = duration_cast<microseconds>(system_clock::now()-start).count();
-    DEBG << qPrintable(QString("TIME: %1 µs SESSION SETUP OVERALL").arg(duration, 6));
+    DEBG << "SESSION SETUP TOTAL [µs]" << duration ;
 }
 
 
-/** ***************************************************************************/
-void Core::QueryManager::teardownSession() {
+void QueryManager::teardownSession()
+{
 
     DEBG << "========== SESSION TEARDOWN STARTED ==========";
 
     system_clock::time_point start = system_clock::now();
 
     // Call all teardown routines
-    for (Core::QueryHandler *handler : extensionManager_->queryHandlers()) {
+    for (QueryHandler *handler : Core::ExtensionManager::Global->extensionsOfType<QueryHandler>()) {
         system_clock::time_point start = system_clock::now();
         handler->teardownSession();
         long duration = duration_cast<microseconds>(system_clock::now()-start).count();
-        DEBG << QString("TIME: %1 µs SESSION TEARDOWN [%2]").arg(duration, 6).arg(handler->id);
+        DEBG << "SESSION TEARDOWN [µs]" << duration << handler->id();
     }
 
     // Clear views
@@ -168,12 +164,12 @@ void Core::QueryManager::teardownSession() {
     updateScores();
 
     long duration = duration_cast<microseconds>(system_clock::now()-start).count();
-    DEBG << QString("TIME: %1 µs SESSION TEARDOWN OVERALL").arg(duration, 6);
+    DEBG << "SESSION TEARDOWN TOTAL [µs]" << duration ;
 }
 
 
-/** ***************************************************************************/
-void Core::QueryManager::startQuery(const QString &searchTerm) {
+void QueryManager::startQuery(const QString &searchTerm)
+{
 
     DEBG << "========== QUERY:" << searchTerm << " ==========";
 
@@ -188,11 +184,7 @@ void Core::QueryManager::startQuery(const QString &searchTerm) {
     system_clock::time_point start = system_clock::now();
 
     // Start query
-    QueryExecution *currentQuery = new QueryExecution(extensionManager_->queryHandlers(),
-                                                      extensionManager_->fallbackProviders(),
-                                                      searchTerm,
-                                                      scores_,
-                                                      incrementalSort_);
+    QueryExecution *currentQuery = new QueryExecution(searchTerm, scores_, incrementalSort_);
     connect(currentQuery, &QueryExecution::resultsReady, this, &QueryManager::resultsReady);
     currentQuery->run();
 
@@ -210,20 +202,20 @@ void Core::QueryManager::startQuery(const QString &searchTerm) {
 }
 
 
-/** ***************************************************************************/
-bool QueryManager::incrementalSort(){
+bool QueryManager::incrementalSort()
+{
     return incrementalSort_;
 }
 
 
-/** ***************************************************************************/
-void QueryManager::setIncrementalSort(bool value){
+void QueryManager::setIncrementalSort(bool value)
+{
     QSettings(qApp->applicationName()).setValue(CFG_INCREMENTAL_SORT, value);
     incrementalSort_ = value;
 }
 
 
-/** ***************************************************************************
+/**
  * @brief Core::MatchCompare::update
  * Update the usage score:
  * Score of a single usage is 1/(<age_in_days>+1).

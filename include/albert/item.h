@@ -1,17 +1,18 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QString>
 #include <vector>
 #include <memory>
-#include "core_globals.h"
+#include "export.h"
 
 namespace Core {
 
 class Action;
 typedef std::vector<std::shared_ptr<Action>> ActionList;
 
-/** ****************************************************************************
+
+/**
  * @brief The item interface
  * Subclass this class to make your object displayable in the results list.
  */

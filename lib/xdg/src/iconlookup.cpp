@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include <QDebug>
 #include <QDir>
@@ -16,7 +16,7 @@ namespace  {
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::IconLookup::iconPath(QStringList iconNames, QString themeName) {
     QString result;
     for ( const QString &iconName : iconNames )
@@ -26,13 +26,13 @@ QString XDG::IconLookup::iconPath(QStringList iconNames, QString themeName) {
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::IconLookup::iconPath(QString iconName, QString themeName){
     return instance()->themeIconPath(iconName, themeName);
 }
 
 
-/** ***************************************************************************/
+
 XDG::IconLookup::IconLookup()
 {
     /*
@@ -56,7 +56,7 @@ XDG::IconLookup::IconLookup()
 
 
 
-/** ***************************************************************************/
+
 XDG::IconLookup *XDG::IconLookup::instance()
 {
     static IconLookup *instance_ = nullptr;
@@ -69,7 +69,7 @@ XDG::IconLookup *XDG::IconLookup::instance()
 
 
 
-/** ***************************************************************************/
+
 QString XDG::IconLookup::themeIconPath(QString iconName, QString themeName){
 
     if (themeName.isEmpty())
@@ -117,7 +117,7 @@ QString XDG::IconLookup::themeIconPath(QString iconName, QString themeName){
 
 
 
-/** ***************************************************************************/
+
 QString XDG::IconLookup::doRecursiveIconLookup(const QString &iconName, const QString &themeName, QStringList *checked){
 
     // Exlude multiple scans
@@ -148,7 +148,7 @@ QString XDG::IconLookup::doRecursiveIconLookup(const QString &iconName, const QS
 
 
 
-/** ***************************************************************************/
+
 QString XDG::IconLookup::doIconLookup(const QString &iconName, const QString &themeFile) {
 
     ThemeFileParser themeFileParser(themeFile);
@@ -184,7 +184,7 @@ QString XDG::IconLookup::doIconLookup(const QString &iconName, const QString &th
 }
 
 
-/** ***************************************************************************/
+
 QString XDG::IconLookup::lookupThemeFile(const QString &themeName)
 {
     // Lookup themefile

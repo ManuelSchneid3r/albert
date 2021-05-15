@@ -1,11 +1,9 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QPushButton>
 #include <QKeyEvent>
 #include <QKeySequence>
-
-namespace Core {
 
 class GrabKeyButton final : public QPushButton
 {
@@ -28,5 +26,3 @@ private:
 signals:
     void keyCombinationPressed(int);
 };
-
-}

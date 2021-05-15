@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include <QAbstractEventDispatcher>
 #include <QDebug>
@@ -326,7 +326,6 @@ namespace {
     };
 
 
-    /** ***********************************************************************/
     bool lastGrabFailed;
     static int XGrabErrorHandler(Display *, XErrorEvent *e) {
         qWarning() << "XGrabError: "<< e->type;
@@ -335,7 +334,7 @@ namespace {
     }
 
 
-//    /** ***********************************************************************/
+//    /\*\* \*{20}\**//
 //    class XLibManager
 //    {
 //    public:
@@ -357,7 +356,7 @@ namespace {
 //    };
 
 
-//    /** ***********************************************************************/
+//    /\*\* \*{20}\**//
 //    class XCBManager
 //    {
 //    public:
@@ -383,7 +382,7 @@ namespace {
 
 }
 
-/** ***************************************************************************/
+
 GlobalShortcut::HotkeyManagerPrivate::HotkeyManagerPrivate(QObject *parent)
     : QObject(parent) {
 
@@ -487,14 +486,14 @@ GlobalShortcut::HotkeyManagerPrivate::HotkeyManagerPrivate(QObject *parent)
 
 
 
-/** ***************************************************************************/
+
 GlobalShortcut::HotkeyManagerPrivate::~HotkeyManagerPrivate() {
 
 }
 
 
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManagerPrivate::registerNativeHotkey(uint hotkey) {
 
     // Convert to native format
@@ -561,7 +560,7 @@ bool GlobalShortcut::HotkeyManagerPrivate::registerNativeHotkey(uint hotkey) {
 
 
 
-/** ***************************************************************************/
+
 void GlobalShortcut::HotkeyManagerPrivate::unregisterNativeHotkey(uint hotkey) {
 
     // Convert to native format
@@ -593,7 +592,7 @@ void GlobalShortcut::HotkeyManagerPrivate::unregisterNativeHotkey(uint hotkey) {
 
 
 
-/** ***************************************************************************/
+
 std::set<uint> GlobalShortcut::HotkeyManagerPrivate::nativeKeycodes(uint qtKey) {
     /* Translate key symbol ( Qt -> X ) */
     // Use latin if possible
@@ -612,7 +611,7 @@ std::set<uint> GlobalShortcut::HotkeyManagerPrivate::nativeKeycodes(uint qtKey) 
 
 
 
-/** ***************************************************************************/
+
 uint GlobalShortcut::HotkeyManagerPrivate::nativeModifiers(uint qtMods) {
     uint ret = 0;
     //    if (qtMods & Qt::ShiftModifier)       ret |= XCB_MOD_MASK_SHIFT;
@@ -628,7 +627,7 @@ uint GlobalShortcut::HotkeyManagerPrivate::nativeModifiers(uint qtMods) {
 
 
 
-/** ***************************************************************************/
+
 bool GlobalShortcut::HotkeyManagerPrivate::nativeEventFilter(const QByteArray &eventType, void *message, long *) {
     if ( eventType == "xcb_generic_event_t" ) {
         xcb_generic_event_t* ev = static_cast<xcb_generic_event_t *>(message);

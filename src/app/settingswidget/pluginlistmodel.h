@@ -1,22 +1,22 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QAbstractListModel>
+#include <vector>
+#include "albert/pluginprovider.h"
 
-namespace Core {
-
-class ExtensionManager;
-
-class LoaderModel final : public QAbstractListModel
-{
+class PluginListModel : public QAbstractListModel {
 public:
-    LoaderModel(Core::ExtensionManager* pm, QObject *parent = nullptr);
+    PluginListModel(QObject *parent = nullptr);
+
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex & index) const override;
-private:
-    Core::ExtensionManager *extensionManager_;
-};
 
-}
+    std::vector<Core::PluginSpec*> plugin_specs;
+
+private:
+    void updatePlugins();
+
+};

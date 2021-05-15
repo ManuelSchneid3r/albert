@@ -6,5 +6,6 @@
         <file alias="app_icon">resources/icons/albert.svg</file>
         <file alias="gear">resources/icons/gear.svg</file>
         <file alias="unknown">resources/icons/unknown.svg</file>
+        <file alias="plugin_loading">resources/icons/plugin_loading.png</file>
     </qresource>
 </RCC>

@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #pragma once
 #include <QAbstractListModel>
@@ -12,13 +12,12 @@
 #include <utility>
 #include <vector>
 #include "albert/query.h"
-
 namespace Core {
-
 class QueryHandler;
 class FallbackProvider;
 class Extension;
 class Item;
+}
 
 struct QueryStatistics {
     QString input;
@@ -34,24 +33,18 @@ struct QueryStatistics {
  * @brief The QueryExecution class
  * Represents the execution of a query
  */
-class QueryExecution : public QAbstractListModel
-{
+class QueryExecution : public QAbstractListModel {
     Q_OBJECT
-
 public:
 
     enum class State { Idle, Running, Finished };
 
-    QueryExecution(const std::set<QueryHandler*> &,
-                   const std::set<FallbackProvider*> &,
-                   const QString &queryString,
-                   std::map<QString,uint> scores,
-                   bool fetchIncrementally);
+    QueryExecution(const QString &queryString, std::map<QString,uint> scores, bool fetchIncrementally);
     ~QueryExecution() override;
 
     const State &state() const;
 
-    const Query *query();
+    const Core::Query *query();
 
     void run();
     void cancel();
@@ -78,21 +71,21 @@ private:
 
     bool isValid_ = true;
 
-    Query query_;
+    Core::Query query_;
     State state_;
 
-    std::set<QueryHandler*> batchHandlers_;
-    std::set<QueryHandler*> realtimeHandlers_;
+    std::set<Core::QueryHandler*> batchHandlers_;
+    std::set<Core::QueryHandler*> realtimeHandlers_;
 
-    mutable std::vector<std::pair<std::shared_ptr<Item>, uint>> results_;
-    mutable std::vector<std::pair<std::shared_ptr<Item>, uint>> fallbacks_;
+    mutable std::vector<std::pair<std::shared_ptr<Core::Item>, uint>> results_;
+    mutable std::vector<std::pair<std::shared_ptr<Core::Item>, uint>> fallbacks_;
     mutable int sortedItems_ = 0;
     bool fetchIncrementally_ = false;
 
     QTimer fiftyMsTimer_;
 
-    QFuture<std::pair<QueryHandler*,uint>> future_;
-    QFutureWatcher<std::pair<QueryHandler*,uint>> futureWatcher_;
+    QFuture<std::pair<Core::QueryHandler*,uint>> future_;
+    QFutureWatcher<std::pair<Core::QueryHandler*,uint>> futureWatcher_;
 
 signals:
 
@@ -100,7 +93,5 @@ signals:
     void stateChanged(State state);
 
 };
-
-}
 
 

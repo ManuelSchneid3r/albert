@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2018 Manuel Schneider
+// Copyright (C) 2014-2021 Manuel Schneider
 
 #include <QStringList>
 #include <QVariant>
@@ -18,7 +18,7 @@ Core::History::History(QObject *parent) : QObject(parent) {
 }
 
 
-/** ***************************************************************************/
+
 void Core::History::add(QString str) {
     if (!str.isEmpty()){
         if (lines_.contains(str))
@@ -29,7 +29,7 @@ void Core::History::add(QString str) {
 }
 
 
-/** ***************************************************************************/
+
 QString Core::History::next(const QString &substring) {
     int newCurrentLine = currentLine_;
     while (++newCurrentLine < static_cast<int>(lines_.size())){
@@ -43,7 +43,7 @@ QString Core::History::next(const QString &substring) {
 }
 
 
-/** ***************************************************************************/
+
 QString Core::History::prev(const QString &substring) {
     int newCurrentLine = currentLine_;
     while (-1 < --newCurrentLine){
@@ -57,7 +57,7 @@ QString Core::History::prev(const QString &substring) {
 }
 
 
-/** ***************************************************************************/
+
 void Core::History::resetIterator() {
     currentLine_ = -1;
 }
